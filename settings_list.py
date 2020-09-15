@@ -44,7 +44,7 @@ initial_mode = 'not_specified'
 
 # music and sounds # GET LIST OF SOUNDS and modify with FOR LOOP
 
-# chuck
+# background music
 music = pygame.mixer.music.load('sounds\\moonson3rdmove.mp3')
 pygame.mixer_music.set_volume(initial_music_volume)
 
@@ -72,14 +72,14 @@ lock_sound = pygame.mixer.Sound('sounds\\se_game_fixa.wav')
 single_sound = pygame.mixer.Sound('sounds\\se_game_single.wav')
 double_sound = pygame.mixer.Sound('sounds\\se_game_double.wav')
 triple_sound = pygame.mixer.Sound('sounds\\se_game_triple.wav')
-tetris_sound = pygame.mixer.Sound('sounds\\se_game_tetris.wav')
+quad_sound = pygame.mixer.Sound('sounds\\se_game_quad.wav')
 
 # level up sound
 levelup_sound = pygame.mixer.Sound('sounds\\me_game_plvup.wav')
 
 sounds = [ok_sound, cancel_sound, youwin_sound, gameover_sound, pause_sound, move_sound,
           softdrop_sound, harddrop_sound, rotate_sound, lock_sound,
-          single_sound, double_sound, triple_sound, tetris_sound, levelup_sound]
+          single_sound, double_sound, triple_sound, quad_sound, levelup_sound]
 
 for sound in sounds:
     sound.set_volume(initial_sound_effects_volume)

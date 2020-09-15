@@ -1,6 +1,6 @@
 # to do
 # All Mollerz stuff
-# new record message
+# new record message:
 # Pack game successfully and distribute
 
 import pygame
@@ -43,7 +43,7 @@ def main(settings, level, fall_speed):
     single = 0
     double = 0
     triple = 0
-    tetris = 0
+    quad = 0
     pentris = 0
     hexis = 0
     drop_points = 0
@@ -195,7 +195,7 @@ def main(settings, level, fall_speed):
         if settings.mode == '40 Lines':
             if fun.check_win(lines):
                 fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
-                                single, double, triple, tetris, pentris, elapsed_time)
+                                single, double, triple, quad, pentris, elapsed_time)
                 fun.draw_next_piece(next_piece, settings)
                 sl.lock_sound.stop()
                 pygame.mixer.music.stop()
@@ -212,7 +212,7 @@ def main(settings, level, fall_speed):
 
         if fun.check_lost(piece_pos, locked_positions):
             fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
-                            single, double, triple, tetris, pentris, elapsed_time)
+                            single, double, triple, quad, pentris, elapsed_time)
             fun.draw_next_piece(next_piece, settings)
             sl.lock_sound.stop()
             pygame.mixer.music.stop()
@@ -253,9 +253,9 @@ def main(settings, level, fall_speed):
                 score += (level + 1) * 300
                 triple += 1
             elif cleared_rows_count == 4:
-                sl.tetris_sound.play()
+                sl.quad_sound.play()
                 score += (level + 1) * 1200
-                tetris += 1
+                quad += 1
             elif cleared_rows_count == 5:
                 score += (level + 1) * 6000
                 pentris += 1
@@ -269,7 +269,7 @@ def main(settings, level, fall_speed):
             lines += cleared_rows_count
 
         fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
-                        single, double, triple, tetris, pentris, elapsed_time)
+                        single, double, triple, quad, pentris, elapsed_time)
         fun.draw_next_piece(next_piece, settings)
 
         pygame.display.update()

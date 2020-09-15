@@ -232,7 +232,7 @@ def draw_text_middle(settings, text, font_name, size, colour, offset):
 
 def draw_window(settings, grid, ghost_piece, ghost_piece_pos,
                 score, high_score, level, lines,
-                single, double, triple, tetris, pentris, elapsed_time):
+                single, double, triple, quad, pentris, elapsed_time):
     # settings.surface.fill((0, 50, 60))
     cs = settings.cell_size
     lgx = settings.left_grid_x
@@ -308,8 +308,8 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos,
     # Line clear counters
     hexis = 0
 
-    labels = ["Hexis", "Pentris", "Tetris", "Triple", "Double", "Single"]
-    counters = [hexis, pentris, tetris, triple, double, single]
+    labels = ["Hexis", "Pentris", "Quad", "Triple", "Double", "Single"]
+    counters = [hexis, pentris, quad, triple, double, single]
     text_colours = [(255, 215, 0), (255, 128, 0), (128, 64, 255), (0, 128, 255), (0, 255, 0), (64, 64, 64)]
 
     for i in range(settings.psps.line_clear_labels):
