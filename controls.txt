@@ -1,0 +1,96 @@
+Move left = a
+Move right = d
+Soft drop = s
+Hard drop = w
+Rotate clockwise = k
+Rotate anti clockwise = j
+Start = b
+
+Accepted Key names
+------------------
+a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+up
+down
+right
+left
+keypad_0
+keypad_1
+keypad_2
+keypad_3
+keypad_4
+keypad_5
+keypad_6
+keypad_7
+keypad_8
+keypad_9
+keypad_period
+keypad_divide
+keypad_multiply
+keypad_minus
+keypad_plus
+keypad_enter
+keypad_equals
+insert
+delete
+home
+end
+page_up
+page_down
+backspace
+tab
+clear
+return
+pause
+space
+exclaim
+quotedbl
+hash
+dollar
+ampersand
+quote
+left_parenthesis
+right_parenthesis
+asterisk
+plus_sign
+comma
+minus_sign
+period
+forward_slash
+colon
+semicolon
+less_than_sign
+equals_sign
+greater_than_sign
+question mark
+at
+left_bracket
+backslash
+right_bracket
+caret
+underscore
+grave
