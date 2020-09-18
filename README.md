@@ -2,7 +2,7 @@
 
 ## Introduction
 
-My first game. This was created in python in about two weeks. I used the pygame module to make this game.
+My first game. This was created in python in about two weeks. I used the pygame module to make this game. Simply download all of the files and execute main.py to begin the game.
 
 ### Controls
 
