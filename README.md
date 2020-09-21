@@ -28,4 +28,4 @@ Wacky: A set of 1000 wacky 1x2 - 3x4 pieces is generated with random colours eve
 ## Gameplay
 
 Use your configured direction keys to move the pieces around. Rotate pieces when necessary and hard drop the piece if/when you want the current piece to drop down and immediately lock into place.
-At the moment you cannot slide pieces left and right, you must tap. The level advances by 1 after every 10 lines.
+At the moment you cannot slide pieces horizontally, you must tap. The level advances by 1 after every 10 lines.
