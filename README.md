@@ -6,7 +6,7 @@ My first game. This was created in python in about two weeks. I used the pygame 
 
 ## Starting the game
 
-You must have the pygame module installed for the game run. Once pygame is installed, download all of the files and execute main.py to begin the game.
+You must have the pygame module installed for the game run. Once pygame is installed, download (and extract) all of the files and execute main.py to begin the game.
 
 ## Controls
 
