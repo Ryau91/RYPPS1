@@ -2,7 +2,11 @@
 
 ## Introduction
 
-My first game. This was created in python in about two weeks. I used the pygame module to make this game. Simply download all of the files and execute main.py to begin the game.
+My first game. This was created in python in about two weeks. I used the pygame module to make this game.
+
+### Starting the game
+
+You must have the pygame module installed for the game run. Once pygame is installed, download all of the files and execute main.py to begin the game.
 
 ### Controls
 
