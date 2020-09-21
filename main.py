@@ -2,7 +2,8 @@
 # All Mollerz stuff
 # new record message:
 # Pack game successfully and distribute
-
+# adjust cell size
+# pack font
 import pygame
 import sys
 import copy
@@ -200,7 +201,7 @@ def main(settings, level, fall_speed):
                 sl.lock_sound.stop()
                 pygame.mixer.music.stop()
 
-                font = pygame.font.SysFont(settings.text_font, 60)
+                font = pygame.font.Font(settings.text_font, 60)
                 fun.draw_text_middle(settings, 'YOU WIN', font, 80, (255, 255, 255), (0, 0))
 
                 pygame.display.update()
@@ -217,7 +218,7 @@ def main(settings, level, fall_speed):
             sl.lock_sound.stop()
             pygame.mixer.music.stop()
 
-            font = pygame.font.SysFont(settings.text_font, 60)
+            font = pygame.font.Font(settings.text_font, 60)
             fun.draw_text_middle(settings, 'GAME OVER', font, 80, (255, 255, 255), (0, 0))
 
             pygame.display.update()
@@ -281,7 +282,7 @@ def pause_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'PAUSED', font, 1, (210, 230, 150), (0, 0))
         fun.draw_text_middle(settings, 'Resume (start)', font, 1, (255, 255, 255), (0, 80))
@@ -316,7 +317,7 @@ def quit_confirm_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Are you sure?', font, 1, (210, 230, 150), (0, -50))
         fun.draw_text_middle(settings, 'Yes (1)', font, 1, (255, 255, 255), (-120, 50))
@@ -362,17 +363,17 @@ def start_menu(settings):
                             [(int(settings.surface.get_width() / 2)) - 400,
                             int(settings.surface.get_height() / 4) - 60,
                             800, 220], 45)
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
         fun.draw_text_middle(settings, 'ROBERT YAU\'S', font, 1, (255, 255, 255),
                              (0, -settings.surface.get_height() // 4))
-        font = pygame.font.SysFont(settings.text_font, 65)
+        font = pygame.font.Font(settings.text_font, 65)
         fun.draw_text_middle(settings, 'PRO PIECE STACKER', font, 1, (255, 255, 255),
                              (0, -(settings.surface.get_height() // 4) + 65))
-        font = pygame.font.SysFont(settings.text_font, 200)
+        font = pygame.font.Font(settings.text_font, 200)
         fun.draw_text_middle(settings, '1', font, 1, (255, 255, 255),
                              (350, -(settings.surface.get_height() // 4) + 40))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
         fun.draw_text_middle(settings, 'Press Start', font, 1, (210, 230, 150), (0, settings.surface.get_height() // 4))
 
         pygame.display.update()
@@ -402,7 +403,7 @@ def main_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Main Menu', font, 1, (210, 230, 150), (0, -200))
         fun.draw_text_middle(settings, 'Play (1)', font, 1, (255, 255, 255), (0, 0))
@@ -438,7 +439,7 @@ def select_mode_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Select Mode', font, 1, (210, 230, 150), (0, -200))
         fun.draw_text_middle(settings, 'Classic (1)', font, 1, (96, 192, 96), (0, 0))
@@ -483,7 +484,7 @@ def piece_set_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Select Piece Set', font, 1, (210, 230, 150), (0, -200))
         fun.draw_text_middle(settings, 'Regular (1)', font, 1, (255, 192, 96), (0, 0))
@@ -538,7 +539,7 @@ def level_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Level', font, 1, (210, 230, 150), (0, -80))
         fun.draw_text_middle(settings, '0   1   2   3   4', font, 1, (255, 255, 255), (0, 0))
@@ -605,12 +606,12 @@ def settings_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Settings', font, 1, (210, 230, 150), (0, -200))
         fun.draw_text_middle(settings, 'Go Back (ESC)', font, 1, (255, 255, 255), (0, 320))
 
-        font = pygame.font.SysFont(settings.text_font, 40)
+        font = pygame.font.Font(settings.text_font, 40)
 
         fun.draw_text_middle(settings, 'Reset High Scores (1)', font, 1, (255, 255, 255), (0, 0))
 
@@ -668,7 +669,7 @@ def reset_high_scores_menu(settings):
     while run:
         settings.surface.fill((0, 50, 60))
 
-        font = pygame.font.SysFont(settings.text_font, 60)
+        font = pygame.font.Font(settings.text_font, 60)
 
         fun.draw_text_middle(settings, 'Are you sure?', font, 1, (210, 230, 150), (0, -50))
         fun.draw_text_middle(settings, 'Yes (1)', font, 1, (255, 255, 255), (-120, 50))

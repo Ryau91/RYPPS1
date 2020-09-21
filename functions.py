@@ -194,7 +194,7 @@ def draw_grid(settings):
 
 
 def draw_next_piece(piece, settings):
-    font = pygame.font.SysFont(settings.text_font, 35)
+    font = pygame.font.Font(settings.text_font, 35)
     rgx = settings.right_grid_x
     cs = settings.cell_size
     centrey = (settings.surface.get_height() // 2)
@@ -260,7 +260,7 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos,
                                                 sh // 2 - (settings.background.get_height() // 2)))
     pygame.font.init()
 
-    font = pygame.font.SysFont(settings.text_font, 35)
+    font = pygame.font.Font(settings.text_font, 35)
 
     # level
     label1 = font.render('Level', 1, (240, 240, 180))

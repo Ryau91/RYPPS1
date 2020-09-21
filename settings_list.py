@@ -11,7 +11,7 @@ initial_s_height = int(pygame.display.Info().current_h * 0.8)
 
 initial_window = pygame.display.set_mode((initial_s_width, initial_s_height), pygame.RESIZABLE)
 initial_fullscreen = False
-initial_cell_size = 35
+initial_cell_size = 30
 
 initial_play_music = True
 initial_play_sounds = True
@@ -31,7 +31,7 @@ for path in background_paths:
 initial_background = random.choice(backgrounds)
 
 # text
-initial_text_font = 'rubik'
+initial_text_font = 'font\\Rubik-ExtraBoldItalic.ttf'
 initial_font_size = 40
 
 # piece
