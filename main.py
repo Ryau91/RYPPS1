@@ -1,11 +1,14 @@
 # to do
+# update scores bug
+# pathlib thing
+# dotted lines around OLL pieces
 # All Mollerz stuff
 # new record message:
 # 40 lines: when game over: game over music, game over
 # when win: victory music, if new record new record!, else complete!
 # not 40 lines: when game over:
 # if new record: victory music, new record!, else game over music, game over
-# Pack game successfully and distribute
+
 import pygame
 import sys
 import copy
@@ -209,7 +212,7 @@ def main(settings, level, fall_speed):
                 pygame.display.update()
                 sl.youwin_sound.play()
                 pygame.time.delay(4000)
-                fun.update_scores_and_praise(settings, elapsed_time)
+                fun.update_scores(settings, elapsed_time)
                 settings.background = sl.initial_background
                 break
 
@@ -226,7 +229,7 @@ def main(settings, level, fall_speed):
             pygame.display.update()
             sl.gameover_sound.play()
             pygame.time.delay(6000)
-            fun.update_scores_and_praise(settings, score)
+            fun.update_scores(settings, score)
             settings.background = sl.initial_background
             break
 
@@ -238,6 +241,7 @@ def main(settings, level, fall_speed):
 
             current_piece = next_piece
             ghost_piece = copy.deepcopy(current_piece)
+            # next piece. if same as current piece, generate another one (can be the same)
             next_piece = fun.get_piece(settings)
             if next_piece.shape == current_piece.shape:
                 next_piece = fun.get_piece(settings)

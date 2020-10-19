@@ -93,7 +93,7 @@ key_dict = {
     "grave": pygame.K_BACKQUOTE,
 }
 
-f = open('Controls.txt', 'r')
+f = open('controls.txt', 'r')
 matches = []
 # match on pattern but only capture what is in parentheses
 pattern = re.compile("[=][\s]?([a-z_]+)")

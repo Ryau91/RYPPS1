@@ -399,7 +399,6 @@ def max_score(settings):
 
 def update_scores(settings, new_score):
     high_score = max_score(settings)
-
     # open scores txt read mode
     f = open('High_Scores.txt', 'r')
     lines = f.readlines()
