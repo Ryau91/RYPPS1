@@ -1,7 +1,5 @@
 # to do
-# update scores bug
 # pathlib thing
-# dotted lines around OLL pieces
 # All Mollerz stuff
 # new record message:
 # 40 lines: when game over: game over music, game over
@@ -54,13 +52,10 @@ def main(settings, level, fall_speed):
     drop_points = 0
 
     clock = pygame.time.Clock()
-    start_the_time = True
 
     while run:
 
-        if start_the_time:
-            start_time = time.time()
-            start_the_time = False
+        start_time = time.time()
 
         grid = fun.create_grid(settings, locked_positions)
         # ghost_grid = grid.copy()

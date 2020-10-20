@@ -392,7 +392,7 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
 
 
 def max_score(settings):
-    f = open('High_Scores.txt', 'r')
+    f = open('high_scores.txt', 'r')
     lines = f.readlines()
     if settings.mode == 'Classic':
         high_score = lines[settings_list.available_piece_sets.index(settings.piece_set_choice)].strip()
@@ -407,14 +407,14 @@ def max_score(settings):
 def update_scores(settings, new_score):
     high_score = max_score(settings)
     # open scores txt read mode
-    f = open('High_Scores.txt', 'r')
+    f = open('high_scores.txt', 'r')
     lines = f.readlines()
 
     # open score txt write mode
 
     if settings.mode != '40 Lines':
         if new_score > int(high_score):
-            f = open('High_Scores.txt', 'w')
+            f = open('high_scores.txt', 'w')
             if settings.mode == 'Classic':
                 lines[settings_list.available_piece_sets.index(settings.piece_set_choice)] = str(new_score) + "\n"
             if settings.mode == 'Invisible':
@@ -426,7 +426,7 @@ def update_scores(settings, new_score):
         seconds = float(high_score[2:])
         best_time = minutes + seconds
         if new_score < best_time:
-            f = open('High_Scores.txt', 'w')
+            f = open('high_scores.txt', 'w')
             if new_score % 60 < 10:
                 elapsed_time = str(int(new_score // 60)) + ":0" + str("{:.2f}".format(new_score % 60))
             else:
@@ -437,6 +437,6 @@ def update_scores(settings, new_score):
 
 
 def reset_high_scores():
-    f = open('High_Scores.txt', 'w')
+    f = open('high_scores.txt', 'w')
     f.write("0\n0\n0\n0\n9:59.99\n9:59.99\n9:59.99\n9:59.99\n0\n0\n0\n0")
     f.close()

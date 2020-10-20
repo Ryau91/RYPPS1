@@ -31,7 +31,7 @@ for path in background_paths:
 initial_background = random.choice(backgrounds)
 
 # text
-initial_text_font = 'font\\Rubik-ExtraBoldItalic.ttf'
+initial_text_font = 'font/Rubik-ExtraBoldItalic.ttf'
 initial_font_size = 40
 
 # piece
@@ -45,37 +45,37 @@ initial_mode = 'not_specified'
 # music and sounds # GET LIST OF SOUNDS and modify with FOR LOOP
 
 # background music
-music = pygame.mixer.music.load('sounds\\moonson3rdmove.mp3')
+music = pygame.mixer.music.load('sounds/moonson3rdmove.mp3')
 pygame.mixer_music.set_volume(initial_music_volume)
 
 # menu sounds
-ok_sound = pygame.mixer.Sound('sounds\\se_sys_ok.wav')
+ok_sound = pygame.mixer.Sound('sounds/se_sys_ok.wav')
 
 # cancel
-cancel_sound = pygame.mixer.Sound('sounds\\se_sys_cancel.wav')
+cancel_sound = pygame.mixer.Sound('sounds/se_sys_cancel.wav')
 
 # win lose
-youwin_sound = pygame.mixer.Sound('sounds\\me_game_iget.wav')
-gameover_sound = pygame.mixer.Sound('sounds\\me_game_gameover.wav')
+youwin_sound = pygame.mixer.Sound('sounds/me_game_iget.wav')
+gameover_sound = pygame.mixer.Sound('sounds/me_game_gameover.wav')
 
 # pause
-pause_sound = pygame.mixer.Sound('sounds\\se_game_pause.wav')
+pause_sound = pygame.mixer.Sound('sounds/se_game_pause.wav')
 
 # control sounds
-move_sound = pygame.mixer.Sound('sounds\\se_game_move.wav')
-softdrop_sound = pygame.mixer.Sound('sounds\\se_game_softdrop.wav')
-harddrop_sound = pygame.mixer.Sound('sounds\\se_game_harddrop.wav')
-rotate_sound = pygame.mixer.Sound('sounds\\se_game_rotate.wav')
-lock_sound = pygame.mixer.Sound('sounds\\se_game_fixa.wav')
+move_sound = pygame.mixer.Sound('sounds/se_game_move.wav')
+softdrop_sound = pygame.mixer.Sound('sounds/se_game_softdrop.wav')
+harddrop_sound = pygame.mixer.Sound('sounds/se_game_harddrop.wav')
+rotate_sound = pygame.mixer.Sound('sounds/se_game_rotate.wav')
+lock_sound = pygame.mixer.Sound('sounds/se_game_fixa.wav')
 
 # line clearing sounds
-single_sound = pygame.mixer.Sound('sounds\\se_game_single.wav')
-double_sound = pygame.mixer.Sound('sounds\\se_game_double.wav')
-triple_sound = pygame.mixer.Sound('sounds\\se_game_triple.wav')
-quad_sound = pygame.mixer.Sound('sounds\\se_game_quad.wav')
+single_sound = pygame.mixer.Sound('sounds/se_game_single.wav')
+double_sound = pygame.mixer.Sound('sounds/se_game_double.wav')
+triple_sound = pygame.mixer.Sound('sounds/se_game_triple.wav')
+quad_sound = pygame.mixer.Sound('sounds/se_game_quad.wav')
 
 # level up sound
-levelup_sound = pygame.mixer.Sound('sounds\\me_game_plvup.wav')
+levelup_sound = pygame.mixer.Sound('sounds/me_game_plvup.wav')
 
 sounds = [ok_sound, cancel_sound, youwin_sound, gameover_sound, pause_sound, move_sound,
           softdrop_sound, harddrop_sound, rotate_sound, lock_sound,
