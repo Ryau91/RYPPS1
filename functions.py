@@ -352,9 +352,8 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
             # oll centre
             if settings.piece_set_choice == "OLL":
                 for i, j in oll_centre_pos:
-                    print(i)
                     if 0 <= i < settings.psps.play_width_cells and 0 < j < settings.psps.play_height_cells:
-                        pygame.draw.rect(settings.surface, (255, 255, 255),
+                        pygame.draw.rect(settings.surface, (128, 128, 128),
                                          ((lgx + i * cs) + 1, (tgy + j * cs) + 1, cs - 2, cs - 2), 1)
 
             # all other colours
