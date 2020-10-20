@@ -230,7 +230,7 @@ def draw_text_middle(settings, text, font_name, size, colour, offset):
                                    (int(settings.surface.get_height() / 2) - int(label.get_height() / 2)) + offset[1])))
 
 
-def draw_window(settings, grid, ghost_piece, ghost_piece_pos,
+def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                 score, high_score, level, lines,
                 single, double, triple, quad, pentris, elapsed_time):
     # settings.surface.fill((0, 50, 60))
@@ -349,6 +349,14 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos,
 
     if settings.mode != 'Invisible':
         if settings.piece_style == "Normal":
+            # oll centre
+            if settings.piece_set_choice == "OLL":
+                for i, j in oll_centre_pos:
+                    print(i)
+                    if 0 <= i < settings.psps.play_width_cells and 0 < j < settings.psps.play_height_cells:
+                        pygame.draw.rect(settings.surface, (255, 255, 255),
+                                         ((lgx + i * cs) + 1, (tgy + j * cs) + 1, cs - 2, cs - 2), 1)
+
             # all other colours
             for i in range(1, len(grid)):
                 for j in range(len(grid[i])):

@@ -21,7 +21,6 @@ import time
 
 
 def main(settings, level, fall_speed):
-
     # music
     if settings.play_music:
         pygame.mixer.music.play(-1)
@@ -30,7 +29,7 @@ def main(settings, level, fall_speed):
 
     # choose random background
     settings.background = random.choice(sl.backgrounds)
-    
+
     # prepare pieces and play_area
 
     change_piece = False
@@ -66,6 +65,10 @@ def main(settings, level, fall_speed):
         grid = fun.create_grid(settings, locked_positions)
         # ghost_grid = grid.copy()
         ghost_piece = copy.deepcopy(current_piece)
+
+        # generate oll centre
+        oll_centre = copy.deepcopy(current_piece)
+        oll_centre.shape = psac.OLL_O
 
         clock.tick(sl.fps)
         fall_time += 1
@@ -188,6 +191,8 @@ def main(settings, level, fall_speed):
 
         ghost_piece_pos = fun.convert_piece_orientation(ghost_piece)
 
+        oll_centre_pos = fun.convert_piece_orientation(oll_centre)
+
         # colour stuff in
         for i in range(len(piece_pos)):
             x, y = piece_pos[i]
@@ -200,7 +205,8 @@ def main(settings, level, fall_speed):
 
         if settings.mode == '40 Lines':
             if fun.check_win(lines):
-                fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
+                fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos, score,
+                                fun.max_score(settings), level, lines,
                                 single, double, triple, quad, pentris, elapsed_time)
                 fun.draw_next_piece(next_piece, settings)
                 sl.lock_sound.stop()
@@ -217,7 +223,8 @@ def main(settings, level, fall_speed):
                 break
 
         if fun.check_lost(piece_pos, locked_positions):
-            fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
+            fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos, score,
+                            fun.max_score(settings), level, lines,
                             single, double, triple, quad, pentris, elapsed_time)
             fun.draw_next_piece(next_piece, settings)
             sl.lock_sound.stop()
@@ -277,7 +284,8 @@ def main(settings, level, fall_speed):
             level_meter += cleared_rows_count
             lines += cleared_rows_count
 
-        fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, score, fun.max_score(settings), level, lines,
+        fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
+                        score, fun.max_score(settings), level, lines,
                         single, double, triple, quad, pentris, elapsed_time)
         fun.draw_next_piece(next_piece, settings)
 
@@ -369,8 +377,8 @@ def start_menu(settings):
                              800, 220], 0)
         pygame.draw.ellipse(settings.surface, (200, 200, 200),
                             [(int(settings.surface.get_width() / 2)) - 400,
-                            int(settings.surface.get_height() / 4) - 60,
-                            800, 220], 45)
+                             int(settings.surface.get_height() / 4) - 60,
+                             800, 220], 45)
         font = pygame.font.Font(settings.text_font, 60)
         fun.draw_text_middle(settings, 'ROBERT YAU\'S', font, 1, (255, 255, 255),
                              (0, -settings.surface.get_height() // 4))
