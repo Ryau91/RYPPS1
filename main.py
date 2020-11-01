@@ -52,10 +52,13 @@ def main(settings, level, fall_speed):
     drop_points = 0
 
     clock = pygame.time.Clock()
+    start_the_time = True
 
     while run:
 
-        start_time = time.time()
+        if start_the_time:
+            start_time = time.time()
+            start_the_time = False
 
         grid = fun.create_grid(settings, locked_positions)
         # ghost_grid = grid.copy()
