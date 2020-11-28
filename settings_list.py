@@ -93,6 +93,9 @@ pygame.display.set_caption('RYPPS1')
 fall_speeds = [48, 43, 38, 33, 28, 23, 18, 13, 8, 6,
                5, 5, 5, 4, 4, 4, 3, 3, 3, 2]
 
+first_advance_lines = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
+                       100, 100, 100, 100, 100, 100, 110, 120, 130, 140]
+
 # available_piece_sets and styles
 available_piece_sets = ["Regular", "Pentris", "OLL", "Wacky"]
 available_piece_styles = ["Normal", "Clear"]

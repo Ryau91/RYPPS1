@@ -229,6 +229,8 @@ pentris_psps = PieceSetPlaySettings(pentomino_piece_set,
                                     pentomino_colours,
                                     0, 3, 12, 21, 5)
 
+# pentris_psps = PieceSetPlaySettings(pentomino_piece_set, pentomino_colours, 0, 3, 5, 21, 5) ### for debugging
+
 # OLL
 
 Sune = [['.0.',

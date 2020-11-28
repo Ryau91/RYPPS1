@@ -1,5 +1,6 @@
 # to do
 # pathlib thing
+# leveling fix?
 # All Mollerz stuff
 # new record message:
 # 40 lines: when game over: game over music, game over
@@ -18,7 +19,7 @@ import settings_list as sl
 import time
 
 
-def main(settings, level, fall_speed):
+def main(settings, level, fall_speed, first_advance_lines):
     # music
     if settings.play_music:
         pygame.mixer.music.play(-1)
@@ -53,7 +54,7 @@ def main(settings, level, fall_speed):
 
     clock = pygame.time.Clock()
     start_the_time = True
-
+    first_advance_lines_reached = False
     while run:
 
         if start_the_time:
@@ -71,7 +72,7 @@ def main(settings, level, fall_speed):
         clock.tick(sl.fps)
         fall_time += 1
 
-        if level_meter >= 10:
+        if (lines >= first_advance_lines) & (level_meter >= 10):
             sl.levelup_sound.play()
             if level < 8:
                 fall_speed -= 5
@@ -83,10 +84,16 @@ def main(settings, level, fall_speed):
             settings.background = random.choice(sl.backgrounds)
 
             level += 1
-            level_meter -= 10
+
+            # only subtract first_advance_lines away once
+            if first_advance_lines_reached:
+                level_meter -= 10
+            else:
+                level_meter -= first_advance_lines
+                first_advance_lines_reached = True
 
         # drop piece by 1
-        if fall_time > fall_speed:
+        if fall_time >= fall_speed:
             fall_time = 0
             current_piece.y += 1
             if not (fun.valid_space(current_piece, grid, settings)) and current_piece.y > 0:
@@ -607,11 +614,12 @@ def level_menu(settings):
                 pygame.time.delay(1000)
                 level = level_picker + add_ten
                 fall_speed = sl.fall_speeds[level]
+                first_advance_lines = sl.first_advance_lines[level]
                 # reset add_ten
                 add_ten = 0
                 # reset level_picker
                 level_picker = -1
-                main(settings, level, fall_speed)
+                main(settings, level, fall_speed, first_advance_lines)
 
 
 def settings_menu(settings):
