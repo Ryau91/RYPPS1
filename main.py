@@ -51,6 +51,7 @@ def main(settings, level, fall_speed, first_advance_lines):
     pentris = 0
     hexis = 0
     drop_points = 0
+    cleared_rows_count = 0
 
     clock = pygame.time.Clock()
     start_the_time = True
@@ -289,6 +290,9 @@ def main(settings, level, fall_speed, first_advance_lines):
             level_meter += cleared_rows_count
             lines += cleared_rows_count
 
+            # basic entry delay
+            time.sleep(0.2)
+
         fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                         score, fun.max_score(settings), level, lines,
                         single, double, triple, quad, pentris, elapsed_time)
@@ -296,6 +300,10 @@ def main(settings, level, fall_speed, first_advance_lines):
 
         pygame.display.update()
 
+        # basic line clear delay
+        if cleared_rows_count > 0:
+            time.sleep(0.3)
+            cleared_rows_count = 0
 
 def pause_menu(settings):
     run = True
