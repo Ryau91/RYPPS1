@@ -305,6 +305,7 @@ def main(settings, level, fall_speed, first_advance_lines):
             time.sleep(0.3)
             cleared_rows_count = 0
 
+
 def pause_menu(settings):
     run = True
 
