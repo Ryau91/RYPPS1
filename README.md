@@ -12,6 +12,10 @@ You must have the pygame module installed for the game run. Once pygame is insta
 
 Use number keys and ESC to navigate through the menus. controls.txt lists the controls for the actual game. To change the controls, read through controls.txt to find the desired keys for input and change accordingly.
 
+Additional controls:
+M key: toggles the music on and off during the game
+F11: toggles fullscreen
+
 ## Modes
 
 Classic: Endless. Aim for the highest score possible.
