@@ -13,20 +13,20 @@ You must have the pygame module installed for the game run. Once pygame is insta
 Use number keys and ESC to navigate through the menus. controls.txt lists the controls for the actual game. To change the controls, read through controls.txt to find the desired keys for input and change accordingly.
 
 Additional controls:
-M key: toggles the music on and off during the game.
-F11: toggles fullscreen.
+M key: toggles the music on and off during the game\
+F11: toggles fullscreen\
 
 ## Modes
 
-Classic: Endless. Aim for the highest score possible.
-40 Lines: Aim to see how fast you can clear 40 lines.
+Classic: Endless. Aim for the highest score possible\
+40 Lines: Aim to see how fast you can clear 40 lines\
 Invisible: Classic but the pieces and locked positions are invisible. The ghost pieces remain visible.
 
 ## Piece sets
 
-Regular: Tetrominoes
-Pentris: Pentominoes
-OLL: OLL inspired pieces that spawn with real OLL probabilities!
+Regular: Tetrominoes\
+Pentris: Pentominoes\
+OLL: OLL inspired pieces that spawn with real OLL probabilities!\
 Wacky: A set of 1000 wacky 1x2 - 3x4 pieces is generated with random colours every time using a basic algorithm that I designed. A new set with new colours is generated every time you play. You will probably never play with the same set twice!
 
 ## Gameplay
