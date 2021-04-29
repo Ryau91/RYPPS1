@@ -197,11 +197,11 @@ def main(settings, level, fall_speed, first_advance_lines):
         if move_piece_y == 1:
             move_counter_y += 1
 
-        if move_counter_x == 5:
+        if move_counter_x == 16:
             current_piece.x += move_piece_x
             if not (fun.valid_space(current_piece, grid, settings)):
                 current_piece.x -= move_piece_x
-            move_counter_x = 0
+            move_counter_x = 10
 
         if move_counter_y == 3:
             current_piece.y += move_piece_y
