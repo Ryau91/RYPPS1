@@ -215,7 +215,7 @@ pentomino_piece_set = [pent_F, pent_mF, pent_I, pent_J, pent_L, pent_leftbolt,
                        pent_rightbolt, pent_P, pent_Q, pent_T, pent_U, pent_V,
                        pent_W, pent_X, pent_Y, pent_mY, pent_Z, pent_S]
 
-# pentomino_piece_set = [pent_I] ### for debugging
+#pentomino_piece_set = [pent_I] ### for debugging
 
 for i in range(len(pentomino_piece_set)):
     pentomino_piece_copy = pentomino_piece_set[i].copy()
@@ -229,7 +229,7 @@ pentris_psps = PieceSetPlaySettings(pentomino_piece_set,
                                     pentomino_colours,
                                     0, 3, 12, 21, 5)
 
-# pentris_psps = PieceSetPlaySettings(pentomino_piece_set, pentomino_colours, 0, 3, 5, 21, 5) ### for debugging
+#pentris_psps = PieceSetPlaySettings(pentomino_piece_set, pentomino_colours, 0, 3, 5, 21, 5) ### for debugging
 
 # OLL
 

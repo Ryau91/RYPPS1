@@ -7,7 +7,7 @@
 # when win: victory music, if new record new record!, else complete!
 # not 40 lines: when game over:
 # if new record: victory music, new record!, else game over music, game over
-
+# Implemented simple DAS! Also basic lock delay, entry delay
 import pygame
 import sys
 import copy
@@ -37,8 +37,10 @@ def main(settings, level, fall_speed, first_advance_lines):
     current_piece = fun.get_piece(settings)
     next_piece = fun.get_piece(settings)
 
-    move_counter = 0
+    move_piece_x = 0
     move_piece_y = 0
+    move_counter_x = 0
+    move_counter_y = 0
 
     fall_time = 0
     level_meter = 0
@@ -135,17 +137,22 @@ def main(settings, level, fall_speed, first_advance_lines):
                     current_piece.x -= 1
                     if not (fun.valid_space(current_piece, grid, settings)):
                         current_piece.x += 1
+                    move_piece_x = -1
+                    move_counter_x = 0
+
 
                 # Move right
                 if event.key == cont.move_right:
                     current_piece.x += 1
                     if not (fun.valid_space(current_piece, grid, settings)):
                         current_piece.x -= 1
+                    move_piece_x = 1
+                    move_counter_x = 0
 
                 # soft drop
                 if event.key == cont.soft_drop:
                     move_piece_y = 1
-                    move_counter = 0
+                    move_counter_y = 0
 
                 # hard drop
                 if event.key == cont.hard_drop:
@@ -171,19 +178,50 @@ def main(settings, level, fall_speed, first_advance_lines):
                     if not (fun.valid_space(current_piece, grid, settings)):
                         current_piece.rotation += 1
 
-            # Stop moving when key up
+            # Stop moving piece when key up
             if event.type == pygame.KEYUP:
+                if event.key == cont.move_left:
+                    move_piece_x = 0
+                    move_counter_x = 0
+                if event.key == cont.move_right:
+                    move_piece_x = 0
+                    move_counter_x = 0
                 if event.key == cont.soft_drop:
                     move_piece_y = 0
+                    move_counter_y = 0
+
+        # if left or right is pressed and held down
+        if move_piece_x != 0:
+            move_counter_x += 1
 
         if move_piece_y == 1:
-            move_counter += 1
+            move_counter_y += 1
 
-        if move_counter == 3:
+        if move_counter_x == 5:
+            current_piece.x += move_piece_x
+            if not (fun.valid_space(current_piece, grid, settings)):
+                current_piece.x -= move_piece_x
+            move_counter_x = 0
+
+        if move_counter_y == 3:
             current_piece.y += move_piece_y
             if not (fun.valid_space(current_piece, grid, settings)):
                 current_piece.y -= move_piece_y
-            move_counter = 0
+            move_counter_y = 0
+
+        # attempt at resetting move_counters accurately
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYUP:
+                if event.key == cont.move_left:
+                    move_piece_x = 0
+                    move_counter_x = 0
+                if event.key == cont.move_right:
+                    move_piece_x = 0
+                    move_counter_x = 0
+                if event.key == cont.soft_drop:
+                    move_piece_y = 0
+                    move_counter_y = 0
 
         piece_pos = fun.convert_piece_orientation(current_piece)
 
@@ -291,7 +329,8 @@ def main(settings, level, fall_speed, first_advance_lines):
             lines += cleared_rows_count
 
             # basic entry delay
-            time.sleep(0.2)
+            if settings.delay:
+                time.sleep(0.2)
 
         fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                         score, fun.max_score(settings), level, lines,
@@ -301,9 +340,10 @@ def main(settings, level, fall_speed, first_advance_lines):
         pygame.display.update()
 
         # basic line clear delay
-        if cleared_rows_count > 0:
-            time.sleep(0.3)
-            cleared_rows_count = 0
+        if settings.delay:
+            if cleared_rows_count > 0:
+                time.sleep(0.3)
+                cleared_rows_count = 0
 
 
 def pause_menu(settings):
@@ -495,12 +535,15 @@ def select_mode_menu(settings):
                     fun.toggle_fullscreen(settings)
                 if event.key == pygame.K_1:
                     sl.ok_sound.play()
+                    settings.delay = True
                     settings.mode = 'Classic'
                 if event.key == pygame.K_2:
                     sl.ok_sound.play()
+                    settings.delay = False
                     settings.mode = '40 Lines'
                 if event.key == pygame.K_3:
                     sl.ok_sound.play()
+                    settings.delay = False
                     settings.mode = 'Invisible'
 
             if settings.mode != 'not_specified':

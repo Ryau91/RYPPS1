@@ -30,6 +30,9 @@ for path in background_paths:
 
 initial_background = random.choice(backgrounds)
 
+# delay
+initial_delay = True
+
 # text
 initial_text_font = 'font/Rubik-ExtraBoldItalic.ttf'
 initial_font_size = 40
@@ -104,7 +107,7 @@ available_piece_styles = ["Normal", "Clear"]
 class Settings(object):
     def __init__(self, surface, fullscreen, cell_size, play_music, play_sound_effects,
                  music_volume, sound_effects_volume, text_font, font_size,
-                 piece_set_choice, psps, piece_style, mode, background):
+                 piece_set_choice, psps, piece_style, mode, background, delay):
         self.surface = surface
         self.fullscreen = fullscreen
         self.cell_size = cell_size
@@ -126,6 +129,7 @@ class Settings(object):
         self.piece_style = piece_style
         self.mode = mode
         self.background = background
+        self.delay = True
 
 
 initial_settings = Settings(initial_window,
@@ -141,4 +145,5 @@ initial_settings = Settings(initial_window,
                             initial_psps,
                             initial_piece_style,
                             initial_mode,
-                            initial_background)
+                            initial_background,
+                            initial_delay)
