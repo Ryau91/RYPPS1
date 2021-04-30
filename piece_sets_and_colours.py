@@ -391,7 +391,7 @@ def zorp1():
 
 
 def zorp2():
-    return random.choice(["0", "."])
+    return random.choice(["0", ".", "."])
 
 
 def zorp3():
@@ -480,35 +480,42 @@ def four_three_madness_piece():
     return piece
 
 
-wacky_piece_set = [four_three_madness_piece() for i in range(750)]
+wacky_piece_set = [four_three_madness_piece() for i in range(667)]
 
 one_by_two = [['....', '.00.', '....', '....']]
 one_by_three = [['....', '.000', '....', '....']]
 one_by_four = [['....', '0000', '....', '....']]
 two_by_two = [['....', '.00.', '.00.', '....']]
-two_by_three = [['....', '.000', '.000', '....']]
-two_by_four = [['....', '0000', '0000', '....']]
-three_by_three = [['....', '.000', '.000', '.000']]
-three_by_four = [['....', '0000', '0000', '0000']]
+little_l = [['....', '.00.', '..0.', '....']]
+basic_J = [['....', '000.', '..0.', '....']]
+basic_L = [['....', '.000', '.0..', '....']]
+basic_T = [['....', '.000', '..0.', '....']]
+basic_S = [['....', '.00.', '00..', '....']]
+basic_Z = [['....', '.00.', '..00', '....']]
+
 four_by_four = [['0000', '0000', '0000', '0000']]
 four_by_four_what = [['.0.0', '0.0.', '.0.0', '0.0.']]
+four_by_four_dots = [['0..0', '....', '....', '0..0']]
 
 wacky_piece_set_nice = [one_by_two,
                         one_by_three,
                         one_by_four,
                         two_by_two,
-                        two_by_three,
-                        two_by_four,
-                        three_by_three,
-                        three_by_four]
+                        little_l,
+                        basic_J,
+                        basic_L,
+                        basic_T,
+                        basic_S,
+                        basic_Z]
 
-for i in range(31):
+for i in range(33):
     for nice_piece in wacky_piece_set_nice:
         wacky_piece_set.append(nice_piece)
 
-# Add the two bonus pieces
+# Add the three bonus pieces
 wacky_piece_set.append(four_by_four)
 wacky_piece_set.append(four_by_four_what)
+wacky_piece_set.append(four_by_four_dots)
 
 for i in range(len(wacky_piece_set)):
     wacky_piece_copy = wacky_piece_set[i].copy()
