@@ -215,7 +215,7 @@ pentomino_piece_set = [pent_F, pent_mF, pent_I, pent_J, pent_L, pent_leftbolt,
                        pent_rightbolt, pent_P, pent_Q, pent_T, pent_U, pent_V,
                        pent_W, pent_X, pent_Y, pent_mY, pent_Z, pent_S]
 
-#pentomino_piece_set = [pent_I] ### for debugging
+# pentomino_piece_set = [pent_I] ### for debugging
 
 for i in range(len(pentomino_piece_set)):
     pentomino_piece_copy = pentomino_piece_set[i].copy()
@@ -229,7 +229,7 @@ pentris_psps = PieceSetPlaySettings(pentomino_piece_set,
                                     pentomino_colours,
                                     0, 3, 12, 21, 5)
 
-#pentris_psps = PieceSetPlaySettings(pentomino_piece_set, pentomino_colours, 0, 3, 5, 21, 5) ### for debugging
+# pentris_psps = PieceSetPlaySettings(pentomino_piece_set, pentomino_colours, 0, 3, 5, 21, 5) ### for debugging
 
 # OLL
 
@@ -480,13 +480,41 @@ def four_three_madness_piece():
     return piece
 
 
-wacky_piece_set = [four_three_madness_piece() for i in range(1000)]
+wacky_piece_set = [four_three_madness_piece() for i in range(750)]
+
+one_by_two = [['....', '.00.', '....', '....']]
+one_by_three = [['....', '.000', '....', '....']]
+one_by_four = [['....', '0000', '....', '....']]
+two_by_two = [['....', '.00.', '.00.', '....']]
+two_by_three = [['....', '.000', '.000', '....']]
+two_by_four = [['....', '0000', '0000', '....']]
+three_by_three = [['....', '.000', '.000', '.000']]
+three_by_four = [['....', '0000', '0000', '0000']]
+four_by_four = [['0000', '0000', '0000', '0000']]
+four_by_four_what = [['.0.0', '0.0.', '.0.0', '0.0.']]
+
+wacky_piece_set_nice = [one_by_two,
+                        one_by_three,
+                        one_by_four,
+                        two_by_two,
+                        two_by_three,
+                        two_by_four,
+                        three_by_three,
+                        three_by_four]
+
+for i in range(31):
+    for nice_piece in wacky_piece_set_nice:
+        wacky_piece_set.append(nice_piece)
+
+# Add the two bonus pieces
+wacky_piece_set.append(four_by_four)
+wacky_piece_set.append(four_by_four_what)
 
 for i in range(len(wacky_piece_set)):
     wacky_piece_copy = wacky_piece_set[i].copy()
     wacky_piece_set[i] = piece_orientation_definer(wacky_piece_copy)
 
-four_three_madness_colours = [random_colour() for i in range(1000)]
+four_three_madness_colours = [random_colour() for i in range(len(wacky_piece_set))]
 
 wacky_psps = PieceSetPlaySettings(wacky_piece_set,
                                   four_three_madness_colours,
