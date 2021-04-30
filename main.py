@@ -180,10 +180,7 @@ def main(settings, level, fall_speed, first_advance_lines):
 
             # Stop moving piece when key up
             if event.type == pygame.KEYUP:
-                if event.key == cont.move_left:
-                    move_piece_x = 0
-                    move_counter_x = 0
-                if event.key == cont.move_right:
+                if (event.key == cont.move_left) or (event.key == cont.move_right):
                     move_piece_x = 0
                     move_counter_x = 0
                 if event.key == cont.soft_drop:
@@ -208,20 +205,6 @@ def main(settings, level, fall_speed, first_advance_lines):
             if not (fun.valid_space(current_piece, grid, settings)):
                 current_piece.y -= move_piece_y
             move_counter_y = 0
-
-        # attempt at resetting move_counters accurately
-
-        for event in pygame.event.get():
-            if event.type == pygame.KEYUP:
-                if event.key == cont.move_left:
-                    move_piece_x = 0
-                    move_counter_x = 0
-                if event.key == cont.move_right:
-                    move_piece_x = 0
-                    move_counter_x = 0
-                if event.key == cont.soft_drop:
-                    move_piece_y = 0
-                    move_counter_y = 0
 
         piece_pos = fun.convert_piece_orientation(current_piece)
 
