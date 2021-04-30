@@ -197,18 +197,12 @@ def draw_next_piece(piece, settings):
     font = pygame.font.Font(settings.text_font, 35)
     rgx = settings.right_grid_x
     cs = settings.cell_size
-    centrey = (settings.surface.get_height() // 2)
+    centre_y = (settings.surface.get_height() // 2)
 
     offset_x = 110
     offset_y = 0
 
     orientation = piece.shape[piece.rotation % len(piece.shape)]
-
-    # # draw black box behind next piece
-    # pygame.draw.rect(settings.surface, (0, 0, 0),
-    #                  (((rgx + offset_x) - ((len(piece.shape[0]) * cs) // 2)),
-    #                   ((centrey + offset_y) - ((len(piece.shape[0]) * cs) // 2)),
-    #                   cs * len(piece.shape[0][0]), cs * len(piece.shape[0][0])), 0)
 
     for i, line in enumerate(orientation):
         row = list(line)
@@ -216,11 +210,31 @@ def draw_next_piece(piece, settings):
             if column == '0':
                 pygame.draw.rect(settings.surface, piece.colour,
                                  (((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2)),
-                                  ((centrey + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)),
+                                  ((centre_y + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)),
                                   cs, cs), 0)
 
+                # draw horizontal line
+                for k in (range(1, (cs // 2))):
+                    # draw horizontal bright lines
+                    pygame.draw.line(settings.surface, brighten_colour(piece.colour),
+                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + k,
+                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + k),
+                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k,
+                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + k), 1)
+                    # draw horizontal dark lines
+                    pygame.draw.line(settings.surface, darken_colour(piece.colour),
+                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + k,
+                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k),
+                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k,
+                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k), 1)
+                # draw darker squares
+                pygame.draw.rect(settings.surface, darken_colour_more(piece.colour),
+                                 ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2),
+                                  centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2),
+                                  cs, cs), 2)
+
     label = font.render('Next Piece', 1, (240, 210, 150))
-    settings.surface.blit(label, (rgx + 20, centrey - (settings.cell_size * 3)))
+    settings.surface.blit(label, (rgx + 20, centre_y - (settings.cell_size * 3)))
 
 
 def draw_text_middle(settings, text, font_name, size, colour, offset):
