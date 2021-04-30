@@ -207,31 +207,29 @@ def draw_next_piece(piece, settings):
     for i, line in enumerate(orientation):
         row = list(line)
         for j, column in enumerate(row):
+            # declare the starting coordinates of the pieces
+            square_origin_x = (rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2)
+            square_origin_y = (centre_y + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)
+
             if column == '0':
                 pygame.draw.rect(settings.surface, piece.colour,
-                                 (((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2)),
-                                  ((centre_y + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)),
-                                  cs, cs), 0)
+                                 (square_origin_x, square_origin_y, cs, cs), 0)
 
                 # draw horizontal line
                 for k in (range(1, (cs // 2))):
+
                     # draw horizontal bright lines
                     pygame.draw.line(settings.surface, brighten_colour(piece.colour),
-                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + k,
-                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + k),
-                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k,
-                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + k), 1)
+                                     (square_origin_x + k, square_origin_y + k),
+                                     (square_origin_x + (cs - 1) - k, square_origin_y + k), 1)
+
                     # draw horizontal dark lines
                     pygame.draw.line(settings.surface, darken_colour(piece.colour),
-                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + k,
-                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k),
-                                     ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k,
-                                      centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2) + (cs - 1) - k), 1)
+                                     (square_origin_x + k, square_origin_y + (cs - 1) - k),
+                                     (square_origin_x + (cs - 1) - k, square_origin_y + (cs - 1) - k), 1)
                 # draw darker squares
                 pygame.draw.rect(settings.surface, darken_colour_more(piece.colour),
-                                 ((rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2),
-                                  centre_y + offset_y + (i * cs) - ((len(piece.shape[0]) * cs) // 2),
-                                  cs, cs), 2)
+                                 (square_origin_x, square_origin_y, cs, cs), 2)
 
     label = font.render('Next Piece', 1, (240, 210, 150))
     settings.surface.blit(label, (rgx + 20, centre_y - (settings.cell_size * 3)))
