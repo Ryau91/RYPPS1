@@ -37,4 +37,4 @@ Use your configured direction keys to move the pieces around. Rotate pieces when
 At the moment you cannot slide pieces horizontally, you must tap. The level advances by 1 after every 10 lines.
 There is no lock delay nor new piece entry delay for 40 Lines mode.\
 
-01/05/21 DAS has been implemented. Pieces move left and right smoothly.
+01/05/21 DAS (Delayed Auto Shift) has been implemented. Pieces move left and right smoothly.
