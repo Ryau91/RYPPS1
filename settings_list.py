@@ -15,7 +15,7 @@ initial_cell_size = 30
 
 initial_play_music = True
 initial_play_sounds = True
-initial_music_volume = 1
+initial_music_volume = 0.5
 initial_sound_effects_volume = 0.2
 
 
@@ -29,6 +29,13 @@ for path in background_paths:
     backgrounds.append(resized_image)
 
 initial_background = random.choice(backgrounds)
+
+# music and sounds # GET LIST OF SOUNDS and modify with FOR LOOP
+
+# background music
+music = glob.glob("./music/*.mp3")
+initial_music = random.choice(music)
+pygame.mixer_music.set_volume(initial_music_volume)
 
 # delay
 initial_delay = True
@@ -44,12 +51,6 @@ initial_piece_style = 'Normal'
 
 # mode
 initial_mode = 'not_specified'
-
-# music and sounds # GET LIST OF SOUNDS and modify with FOR LOOP
-
-# background music
-music = pygame.mixer.music.load('sounds/moonson3rdmove.mp3')
-pygame.mixer_music.set_volume(initial_music_volume)
 
 # menu sounds
 ok_sound = pygame.mixer.Sound('sounds/se_sys_ok.wav')
@@ -107,7 +108,7 @@ available_piece_styles = ["Normal", "Clear"]
 class Settings(object):
     def __init__(self, surface, fullscreen, cell_size, play_music, play_sound_effects,
                  music_volume, sound_effects_volume, text_font, font_size,
-                 piece_set_choice, psps, piece_style, mode, background, delay):
+                 piece_set_choice, psps, piece_style, mode, background, music, delay):
         self.surface = surface
         self.fullscreen = fullscreen
         self.cell_size = cell_size
@@ -129,6 +130,7 @@ class Settings(object):
         self.piece_style = piece_style
         self.mode = mode
         self.background = background
+        self.music = music
         self.delay = True
 
 
@@ -146,4 +148,5 @@ initial_settings = Settings(initial_window,
                             initial_piece_style,
                             initial_mode,
                             initial_background,
+                            initial_music,
                             initial_delay)

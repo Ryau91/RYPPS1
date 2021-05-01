@@ -1,13 +1,15 @@
 # to do
 # pathlib thing
-# leveling fix?
 # All Mollerz stuff
 # new record message:
 # 40 lines: when game over: game over music, game over
 # when win: victory music, if new record new record!, else complete!
 # not 40 lines: when game over:
 # if new record: victory music, new record!, else game over music, game over
-# Implemented simple DAS! Also basic lock delay, entry delay
+# add feature for custom music
+# lock delay ?
+# halved music volume
+
 import pygame
 import sys
 import copy
@@ -20,9 +22,15 @@ import time
 
 
 def main(settings, level, fall_speed, first_advance_lines):
+
     # music
+    settings.music = random.choice(sl.music)
+    song_end = pygame.USEREVENT + 1
+    pygame.mixer.music.set_endevent(song_end)
+
     if settings.play_music:
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.load(settings.music)
+        pygame.mixer.music.play()
         settings.music_is_playing = True
     locked_positions = {}
 
@@ -58,6 +66,7 @@ def main(settings, level, fall_speed, first_advance_lines):
     clock = pygame.time.Clock()
     start_the_time = True
     first_advance_lines_reached = False
+
     while run:
 
         if start_the_time:
@@ -65,6 +74,7 @@ def main(settings, level, fall_speed, first_advance_lines):
             start_the_time = False
 
         grid = fun.create_grid(settings, locked_positions)
+
         # ghost_grid = grid.copy()
         ghost_piece = copy.deepcopy(current_piece)
 
@@ -115,6 +125,12 @@ def main(settings, level, fall_speed, first_advance_lines):
                     settings.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
                 fun.update_settings(settings)
 
+            # song ended, pick a random new song and play it
+            if event.type == song_end:
+                settings.music = random.choice(sl.music)
+                pygame.mixer.music.load(settings.music)
+                pygame.mixer.music.play()
+
             if event.type == pygame.KEYDOWN:
                 # Quit
                 if event.key == pygame.K_ESCAPE:
@@ -140,7 +156,6 @@ def main(settings, level, fall_speed, first_advance_lines):
                     move_piece_x = -1
                     move_counter_x = 0
 
-
                 # Move right
                 if event.key == cont.move_right:
                     current_piece.x += 1
@@ -151,6 +166,9 @@ def main(settings, level, fall_speed, first_advance_lines):
 
                 # soft drop
                 if event.key == cont.soft_drop:
+                    current_piece.y += 1
+                    if not (fun.valid_space(current_piece, grid, settings)):
+                        current_piece.y -= 1
                     move_piece_y = 1
                     move_counter_y = 0
 
@@ -200,11 +218,11 @@ def main(settings, level, fall_speed, first_advance_lines):
                 current_piece.x -= move_piece_x
             move_counter_x = 7
 
-        if move_counter_y == 3:
+        if move_counter_y == 8:
             current_piece.y += move_piece_y
             if not (fun.valid_space(current_piece, grid, settings)):
                 current_piece.y -= move_piece_y
-            move_counter_y = 0
+            move_counter_y = 7
 
         piece_pos = fun.convert_piece_orientation(current_piece)
 
