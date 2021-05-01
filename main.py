@@ -194,11 +194,11 @@ def main(settings, level, fall_speed, first_advance_lines):
         if move_piece_y == 1:
             move_counter_y += 1
 
-        if move_counter_x == 16:
+        if move_counter_x == 8:
             current_piece.x += move_piece_x
             if not (fun.valid_space(current_piece, grid, settings)):
                 current_piece.x -= move_piece_x
-            move_counter_x = 10
+            move_counter_x = 7
 
         if move_counter_y == 3:
             current_piece.y += move_piece_y
@@ -313,7 +313,7 @@ def main(settings, level, fall_speed, first_advance_lines):
 
             # basic entry delay
             if settings.delay:
-                time.sleep(0.2)
+                time.sleep(0.01)
 
         fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                         score, fun.max_score(settings), level, lines,

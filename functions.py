@@ -90,10 +90,11 @@ def get_piece(settings):
 
 
 def valid_space(shape, grid, settings):
+
     # produce list of coordinates for all positions in the grid for each row if position is empty (i.e. black)
     accepted_pos = [[(j, i) for j in range(settings.psps.play_width_cells) if grid[i][j] == (0, 0, 0)] for i
-                    in
-                    range(settings.psps.play_height_cells)]
+                    in range(settings.psps.play_height_cells)]
+
     # return list of coordinates for all positions in the grid
     accepted_pos = [j for sub in accepted_pos for j in sub]
 
@@ -151,8 +152,8 @@ def update_settings(settings):
     settings.top_grid_y = (settings.surface.get_height() - settings.play_height) // 2
     settings.bottom_grid_y = (settings.surface.get_height() + settings.play_height) // 2
 
-# colour functions
 
+# colour functions
 
 def brighten_colour(colour):
     new_colour = []
@@ -175,8 +176,26 @@ def darken_colour_more(colour):
     return new_colour[0], new_colour[1], new_colour[2]
 
 
-# draw functions
+def prettify_blocks(settings, colour, start_pos_x, start_pos_y):
 
+    cs = settings.cell_size
+
+    for k in (range(1, (cs // 2))):
+        # draw horizontal bright lines
+        pygame.draw.line(settings.surface, brighten_colour(colour),
+                         (start_pos_x + k, start_pos_y + k),
+                         (start_pos_x + (cs - 1) - k, start_pos_y + k), 1)
+
+        # draw horizontal dark lines
+        pygame.draw.line(settings.surface, darken_colour(colour),
+                         (start_pos_x + k, start_pos_y + (cs - 1) - k),
+                         (start_pos_x + (cs - 1) - k, start_pos_y + (cs - 1) - k), 1)
+    # draw darker squares
+    pygame.draw.rect(settings.surface, darken_colour_more(colour),
+                     (start_pos_x, start_pos_y, cs, cs), 2)
+
+
+# draw functions
 
 def draw_grid(settings):
     sx = settings.left_grid_x
@@ -193,83 +212,15 @@ def draw_grid(settings):
                          (sx + j * settings.cell_size, sy + settings.play_height), 3)
 
 
-def draw_next_piece(piece, settings):
-    font = pygame.font.Font(settings.text_font, 35)
-    rgx = settings.right_grid_x
-    cs = settings.cell_size
-    centre_y = (settings.surface.get_height() // 2)
+def draw_labels(settings, score, high_score, level, lines, single, double, triple, quad, pentris, elapsed_time):
 
-    offset_x = 110
-    offset_y = 0
-
-    orientation = piece.shape[piece.rotation % len(piece.shape)]
-
-    for i, line in enumerate(orientation):
-        row = list(line)
-        for j, column in enumerate(row):
-            # declare the starting coordinates of the pieces
-            square_origin_x = (rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2)
-            square_origin_y = (centre_y + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)
-
-            if column == '0':
-                pygame.draw.rect(settings.surface, piece.colour,
-                                 (square_origin_x, square_origin_y, cs, cs), 0)
-
-                # draw horizontal line
-                for k in (range(1, (cs // 2))):
-
-                    # draw horizontal bright lines
-                    pygame.draw.line(settings.surface, brighten_colour(piece.colour),
-                                     (square_origin_x + k, square_origin_y + k),
-                                     (square_origin_x + (cs - 1) - k, square_origin_y + k), 1)
-
-                    # draw horizontal dark lines
-                    pygame.draw.line(settings.surface, darken_colour(piece.colour),
-                                     (square_origin_x + k, square_origin_y + (cs - 1) - k),
-                                     (square_origin_x + (cs - 1) - k, square_origin_y + (cs - 1) - k), 1)
-                # draw darker squares
-                pygame.draw.rect(settings.surface, darken_colour_more(piece.colour),
-                                 (square_origin_x, square_origin_y, cs, cs), 2)
-
-    label = font.render('Next Piece', 1, (240, 210, 150))
-    settings.surface.blit(label, (rgx + 20, centre_y - (settings.cell_size * 3)))
-
-
-def draw_text_middle(settings, text, font_name, size, colour, offset):
-    label = font_name.render(text, size, colour)
-
-    settings.surface.blit(label, (((int(settings.surface.get_width() / 2) - int(label.get_width() / 2)) + offset[0],
-                                   (int(settings.surface.get_height() / 2) - int(label.get_height() / 2)) + offset[1])))
-
-
-def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
-                score, high_score, level, lines,
-                single, double, triple, quad, pentris, elapsed_time):
-    # settings.surface.fill((0, 50, 60))
     cs = settings.cell_size
     lgx = settings.left_grid_x
     rgx = settings.right_grid_x
     tgy = settings.top_grid_y
-    bgy = settings.bottom_grid_y
     sw = settings.surface.get_width()
     sh = settings.surface.get_height()
 
-    # Play_area colours
-    if settings.mode != 'Invisible':
-        for i in range(1, len(grid)):
-            for j in range(len(grid[i])):
-                if grid[i][j] == (0, 0, 0):
-                    pygame.draw.rect(settings.surface, grid[i][j],
-                                     ((lgx + j * cs), (tgy + i * cs), cs, cs), 0)
-
-    if settings.mode == 'Invisible':
-        for i in range(1, len(grid)):
-            for j in range(len(grid[i])):
-                pygame.draw.rect(settings.surface, (0, 0, 0),
-                                 ((lgx + j * cs), (tgy + i * cs), cs, cs), 0)
-
-    settings.surface.blit(settings.background, (sw // 2 - (settings.background.get_width() // 2),
-                                                sh // 2 - (settings.background.get_height() // 2)))
     pygame.font.init()
 
     font = pygame.font.Font(settings.text_font, 35)
@@ -330,6 +281,86 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
         settings.surface.blit(label1, (lgx - 160, tgy + (70 * i)))
         settings.surface.blit(label2, (lgx - (label2.get_width() + 30), tgy + 35 + (70 * i)))
 
+
+def draw_next_piece(piece, settings):
+    font = pygame.font.Font(settings.text_font, 35)
+    rgx = settings.right_grid_x
+    cs = settings.cell_size
+    centre_y = (settings.surface.get_height() // 2)
+
+    # For clear pieces
+    if settings.piece_style == "Normal":
+        colour = piece.colour
+    elif settings.piece_style == "Clear":
+        colour = (255, 255, 255)
+
+    offset_x = 110
+    offset_y = 0
+
+    orientation = piece.shape[piece.rotation % len(piece.shape)]
+
+    for i, line in enumerate(orientation):
+        row = list(line)
+
+        for j, column in enumerate(row):
+            # declare the starting coordinates of the pieces
+            square_origin_x = (rgx + offset_x + (j * cs)) - ((len(piece.shape[0]) * cs) // 2)
+            square_origin_y = (centre_y + offset_y + (i * cs)) - ((len(piece.shape[0]) * cs) // 2)
+
+            if column == '0':
+                if settings.piece_style == "Normal":
+                    pygame.draw.rect(settings.surface, colour,
+                                     (square_origin_x, square_origin_y, cs, cs), 0)
+
+                    prettify_blocks(settings, piece.colour, square_origin_x, square_origin_y)
+
+                else:
+                    pygame.draw.rect(settings.surface, colour,
+                                     (square_origin_x, square_origin_y, cs, cs), 2)
+
+    label = font.render('Next Piece', 1, (240, 210, 150))
+    settings.surface.blit(label, (rgx + 20, centre_y - (settings.cell_size * 3)))
+
+
+def draw_text_middle(settings, text, font_name, size, colour, offset):
+    label = font_name.render(text, size, colour)
+
+    settings.surface.blit(label, (((int(settings.surface.get_width() / 2) - int(label.get_width() / 2)) + offset[0],
+                                   (int(settings.surface.get_height() / 2) - int(label.get_height() / 2)) + offset[1])))
+
+
+def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
+                score, high_score, level, lines,
+                single, double, triple, quad, pentris, elapsed_time):
+    # settings.surface.fill((0, 50, 60))
+    cs = settings.cell_size
+    lgx = settings.left_grid_x
+    rgx = settings.right_grid_x
+    tgy = settings.top_grid_y
+    bgy = settings.bottom_grid_y
+    sw = settings.surface.get_width()
+    sh = settings.surface.get_height()
+
+    # Play_area colours
+    if settings.mode != 'Invisible':
+        for i in range(1, len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == (0, 0, 0):
+                    pygame.draw.rect(settings.surface, grid[i][j],
+                                     ((lgx + j * cs), (tgy + i * cs), cs, cs), 0)
+
+    if settings.mode == 'Invisible':
+        for i in range(1, len(grid)):
+            for j in range(len(grid[i])):
+                pygame.draw.rect(settings.surface, (0, 0, 0),
+                                 ((lgx + j * cs), (tgy + i * cs), cs, cs), 0)
+
+    settings.surface.blit(settings.background, (sw // 2 - (settings.background.get_width() // 2),
+                                                sh // 2 - (settings.background.get_height() // 2)))
+
+    # draw labels
+    draw_labels(settings, score, high_score, level, lines, single, double, triple, quad, pentris, elapsed_time)
+
     # Play_area colours
     if settings.mode != 'Invisible':
         for i in range(1, len(grid)):
@@ -347,7 +378,7 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
     # Grid Lines
     draw_grid(settings)
 
-    # ghost piece
+    # Ghost piece
 
     if settings.piece_style == "Normal":
         colour = ghost_piece.colour
@@ -359,9 +390,11 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
             pygame.draw.rect(settings.surface, colour,
                              ((lgx + i * cs) + 1, (tgy + j * cs) + 1, cs - 2, cs - 2), 1)
 
+    # OLL grid
     if settings.mode != 'Invisible':
         if settings.piece_style == "Normal":
-            # oll centre
+
+            # OLL centre
             if settings.piece_set_choice == "OLL":
                 for i, j in oll_centre_pos:
                     if 0 <= i < settings.psps.play_width_cells and 0 < j < settings.psps.play_height_cells:
@@ -376,21 +409,7 @@ def draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                                          ((lgx + j * cs) + 1, (tgy + i * cs) + 1, cs - 2, cs - 2), 0)
 
                         # make blocks look pretty
-
-                        # draw horizontal line
-                        for k in (range(1, (cs // 2))):
-                            # draw horizontal bright lines
-                            pygame.draw.line(settings.surface, brighten_colour(grid[i][j]),
-                                             ((lgx + j * cs) + k, (tgy + i * cs) + k),
-                                             ((lgx + j * cs) + (cs - 1) - k, (tgy + i * cs) + k), 1)
-                            # draw horizontal dark lines
-                            pygame.draw.line(settings.surface, darken_colour(grid[i][j]),
-                                             ((lgx + j * cs) + k, (tgy + i * cs) + (cs - 1) - k),
-                                             ((lgx + j * cs) + (cs - 1) - k, (tgy + i * cs) + (cs - 1) - k), 1)
-
-                        # draw darker squares
-                        pygame.draw.rect(settings.surface, darken_colour_more(grid[i][j]),
-                                         ((lgx + j * cs), (tgy + i * cs), cs, cs), 2)
+                        prettify_blocks(settings, grid[i][j], lgx + j * cs, tgy + i * cs)
 
     # play area border
     pygame.draw.rect(settings.surface, (255, 120, 120), (
