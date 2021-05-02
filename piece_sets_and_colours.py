@@ -494,8 +494,8 @@ basic_S = [['....', '.00.', '00..', '....']]
 basic_Z = [['....', '.00.', '..00', '....']]
 
 four_by_four = [['0000', '0000', '0000', '0000']]
-four_by_four_what = [['.0.0', '0.0.', '.0.0', '0.0.']]
-four_by_four_dots = [['0..0', '....', '....', '0..0']]
+four_by_four_holo_square = [['0000', '0..0', '0..0', '0000']]
+four_by_four_swasty = [['00.0', '.000', '000.', '00.0']]
 
 wacky_piece_set_nice = [one_by_two,
                         one_by_three,
@@ -514,8 +514,8 @@ for i in range(33):
 
 # Add the three bonus pieces
 wacky_piece_set.append(four_by_four)
-wacky_piece_set.append(four_by_four_what)
-wacky_piece_set.append(four_by_four_dots)
+wacky_piece_set.append(four_by_four_holo_square)
+wacky_piece_set.append(four_by_four_swasty)
 
 for i in range(len(wacky_piece_set)):
     wacky_piece_copy = wacky_piece_set[i].copy()
