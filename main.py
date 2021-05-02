@@ -7,8 +7,8 @@
 # not 40 lines: when game over:
 # if new record: victory music, new record!, else game over music, game over
 # add feature for custom music
-# lock delay ?
-# halved music volume
+# lock delay?
+# fix highscores
 
 import pygame
 import sys
@@ -331,7 +331,7 @@ def main(settings, level, fall_speed, first_advance_lines):
 
             # basic entry delay
             if settings.delay:
-                time.sleep(0.01)
+                time.sleep(0.25)
 
         fun.draw_window(settings, grid, ghost_piece, ghost_piece_pos, oll_centre_pos,
                         score, fun.max_score(settings), level, lines,
